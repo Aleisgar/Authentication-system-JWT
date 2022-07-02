@@ -34,13 +34,13 @@ def login_user():
     print(email)
     password = request.json.get("password",None)
     print(password)
-    if not email:
-        return jsonify({"error":"Invalid"}),400
-    if not password:
-        return jsonify({"error":"Invalid"}),400
-   
-    acces_token=create_access_token(identity=email)
-    return jsonify(acces_token=acces_token)
+    user = User.query.filter_by(email=email).first()
+    if user is None:
+        return jsonify({"msg": "Bad username or password"}), 401
+
+    acces_token = create_access_token(identity=email)
+    print(acces_token)
+    return jsonify(acces_token)
   
 
 @api.route('/profile',methods =['GET'])    

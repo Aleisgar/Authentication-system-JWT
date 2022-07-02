@@ -17,8 +17,7 @@ const getState = ({
                     initial: "white"
                 }
             ],
-
-
+            auth: false
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -44,7 +43,7 @@ const getState = ({
 
             createUser: (username, email, password) => {
                 console.log(username, email, password);
-                fetch("https: //3000-4geeksacade-reactflaskh-ikmzqd58ckk.ws-eu47.gitpod.io/api/signup", {
+                fetch(process.env.BACKEND_URL + '/api/signup', {
                         method: "POST",
                         body: JSON.stringify({
                             "username": username,
@@ -54,26 +53,43 @@ const getState = ({
                         headers: {
                             "Content-Type": "application/json",
                         },
-
                     })
-
                     .then(resp => resp.json())
-
-                    .then(data => console.log(data))
-                //     setStore({
-                //         message: data.message
-                //     })
-                //     // don't forget to return something, that is how the async resolves
-                //     return data;
-                // }
-                // catch (error) {
-                //     console.log("Error loading message from backend", error)
+                    .then(data => console.log(data)) //hace falta modificar el setStore?
             },
 
             login: (email, password) => {
-                log(email, password)
-            },
+                fetch(process.env.BACKEND_URL + '/api/login', {
+                        method: "POST",
+                        body: JSON.stringify({
+                            "email": email,
+                            "password": password
+                        }),
 
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    })
+                    .then(resp => {
+                        if (resp.status == 200) {
+                            setStore({
+                                auth: true
+                            })
+                        }
+                        resp.json()
+                    })
+                    .then(data => console.log(data))
+                // localStorage.setItem("token", data.acces_token))
+            },
+            logout: () => {
+                if (auth = true) {
+                    setStore
+                        ({
+                            auth: false
+                        })
+                    localStorage.removeItem("token")
+                }
+            },
 
             changeColor: (index, color) => {
                 //get the store

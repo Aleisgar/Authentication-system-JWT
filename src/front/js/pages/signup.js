@@ -5,23 +5,24 @@ import "../../styles/home.css";
 export const Signup = () => {
   const {store,actions} = useContext(Context);
 
-    const [username,setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [password,setPassword] = useState("")
+  const [username,setUsername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password,setPassword] = useState("")
 
-    const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
       e.preventDefault();
        if (username !== "" && email !=="" && password !=="") {
          actions.createUser(username,email,password)
+         alert("Your user has been succesfully")
         } else {
           alert("Rellena todos los campos");
       }
     };
 
   return (
-    <>
+    <div className="container">
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <div className="my-3">
           <label htmlFor="sds" className="form-label">
            Enter a username
           </label>
@@ -66,6 +67,6 @@ export const Signup = () => {
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 };
