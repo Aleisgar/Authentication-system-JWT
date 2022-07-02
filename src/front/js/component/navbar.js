@@ -8,7 +8,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container">
-        <Link to="/home">
+        <Link to="/">
           <span className="navbar-brand mb-0 h1">Home</span>
         </Link>
         <div className="d-flex">
@@ -18,7 +18,7 @@ export const Navbar = () => {
           <div className="me-2"></div>
           <div>
             {store.auth === true ? (
-              <Link to="/home">
+              <Link to="/">
                 <button className="btn btn-primary" onClick={actions.logout}>
                   Logout
                 </button>
