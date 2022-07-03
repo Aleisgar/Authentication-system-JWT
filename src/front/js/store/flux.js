@@ -17,7 +17,8 @@ const getState = ({
                     initial: "white"
                 }
             ],
-            auth: false
+            auth: false,
+            error: false
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -55,10 +56,12 @@ const getState = ({
                         },
                     })
                     .then(resp => resp.json())
-                    .then(data => console.log(data)) //hace falta modificar el setStore?
+                    .then(data => console.log(data))
             },
 
             login: (email, password) => {
+                const store = getStore()
+                store.error = false
                 fetch(process.env.BACKEND_URL + '/api/login', {
                         method: "POST",
                         body: JSON.stringify({
@@ -75,14 +78,21 @@ const getState = ({
                             setStore({
                                 auth: true
                             })
+
+                        } else {
+                            setStore({
+                                error: true
+                            });
                         }
-                        resp.json()
+
+                        return resp.json()
                     })
-                    .then(data => console.log(data))
-                // localStorage.setItem("token", data.acces_token))
+                    .then(data => localStorage.setItem("token", data.token))
+
             },
             logout: () => {
-                if (auth = true) {
+                const store = getStore();
+                if (store.auth = true) {
                     setStore
                         ({
                             auth: false
