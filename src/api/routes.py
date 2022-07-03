@@ -49,6 +49,7 @@ def acces_profile():
     user_data=get_jwt_identity()
     user = User.query.filter_by(email=user_data).first()
     return jsonify(user.serialize()), 200
+    
 
 
    

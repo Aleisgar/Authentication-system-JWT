@@ -20,13 +20,13 @@ export const Login = () => {
       alert("Rellena todos los campos");
     }
   };
-
+ const errorSubmit = {}
   return (
     <>
       {" "}
       {store.auth === true ? (
         <Navigate to="/profile" />
-      ) : (
+      ) : ( 
         <div className="container">
           <form onSubmit={handleSubmit}>
             <div className="my-3">
