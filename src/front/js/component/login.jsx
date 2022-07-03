@@ -12,9 +12,10 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email !== "" && password !== "") {
-      actions.login(email, password)
-      {if(store.error == false){console.log(store.error)}
-      }}
+      actions.login(email, password); {
+         if(store.auth == false){
+          alert("Email o password incorrectos, vuelve a intentarlo")}}
+    } 
     else {
       alert("Rellena todos los campos");
     }

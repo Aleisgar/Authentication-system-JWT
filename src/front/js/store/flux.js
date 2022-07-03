@@ -18,7 +18,7 @@ const getState = ({
                 }
             ],
             auth: false,
-            error: false
+
         },
         actions: {
             // Use getActions to call a function within a fuction
@@ -60,8 +60,7 @@ const getState = ({
             },
 
             login: (email, password) => {
-                const store = getStore()
-                store.error = false
+
                 fetch(process.env.BACKEND_URL + '/api/login', {
                         method: "POST",
                         body: JSON.stringify({
@@ -76,13 +75,9 @@ const getState = ({
                     .then(resp => {
                         if (resp.status == 200) {
                             setStore({
-                                auth: true
+                                auth: true,
+                                error: false
                             })
-
-                        } else {
-                            setStore({
-                                error: true
-                            });
                         }
 
                         return resp.json()
