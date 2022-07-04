@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const Login = () => {
   const { store, actions } = useContext(Context);
@@ -12,15 +12,13 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (email !== "" && password !== "") {
-      actions.login(email, password); {
-         if(store.auth == false){
-          alert("Email o password incorrectos, vuelve a intentarlo")}}
+      actions.login(email, password) 
     } 
     else {
       alert("Rellena todos los campos");
     }
   };
- const errorSubmit = {}
+ 
   return (
     <>
       {" "}

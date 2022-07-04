@@ -42,6 +42,7 @@ const getState = ({
 
             },
 
+            // función crear Usuario en la ruta signup
             createUser: (username, email, password) => {
                 console.log(username, email, password);
                 fetch(process.env.BACKEND_URL + '/api/signup', {
@@ -59,6 +60,8 @@ const getState = ({
                     .then(data => console.log(data))
             },
 
+            // función login con catch para el error de autenticación
+
             login: (email, password) => {
 
                 fetch(process.env.BACKEND_URL + '/api/login', {
@@ -73,18 +76,25 @@ const getState = ({
                         },
                     })
                     .then(resp => {
+                        // !resp.ok {trhow new Error ("Contraseña incorrecta")}
+                        // setStore({authtrue})
+                        //return resp.json()
                         if (resp.status == 200) {
-                            setStore({
-                                auth: true,
-                                error: false
-                            })
-                        }
 
+                            setStore({
+                                auth: true
+                            })
+                        } else {
+                            throw new Error("Contraseña incorrecta")
+                        }
                         return resp.json()
                     })
                     .then(data => localStorage.setItem("token", data.token))
-
+                    .catch(error => alert(error))
             },
+
+            //función logout con borrado de token
+
             logout: () => {
                 const store = getStore();
                 if (store.auth = true) {

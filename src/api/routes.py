@@ -18,6 +18,8 @@ def handle_hello():
     }
     return jsonify(response_body), 200
 
+# Creación de nuevo usuario
+
 @api.route('/signup', methods =['POST'])
 def signup_endpoint():
     body = json.loads(request.data)
@@ -27,6 +29,8 @@ def signup_endpoint():
     db.session.commit()
     print(new_user)
     return jsonify(new_user.serialize(),200)
+
+# Login    
 
 @api.route('/login',methods =['POST'])    
 def login_user():
@@ -42,6 +46,7 @@ def login_user():
     print(acces_token)
     return jsonify({"token":acces_token})
   
+# Acceso ruta privada con jwt_required
 
 @api.route('/profile',methods =['GET'])    
 @jwt_required()
